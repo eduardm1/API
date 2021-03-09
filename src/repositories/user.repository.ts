@@ -1,5 +1,4 @@
-import {getRepository } from 'typeorm';
-import {User} from '../models';
+import { Client,  Prisma, PrismaClient,} from '@prisma/client'
 
 export interface IUserPayload {
     firstName: string;
@@ -7,23 +6,27 @@ export interface IUserPayload {
     email: string;
 }
 
-export const getUsers = async (): Promise<Array<User>> => {
-    const userRepository = getRepository(User);
-    return userRepository.find();
+
+export const getClients = async (): Promise<Client[]> => {
+    // console.log(userRepository.metadata);
+    const prisma = new PrismaClient()
+    return await prisma.client.findMany();
+    
 }
 
-export const createUser = async (payload: IUserPayload): Promise<User> => {
-    const userRepository = getRepository(User);
-    const user = new User();
-    return userRepository.save({
-        ...user,
-        ...payload
+export const createUser = async (payload: Client) => {
+    const prisma = new PrismaClient();
+    await prisma.client.create({
+        data: payload
     });
 }
 
-export const getUser = async (id: number): Promise<User | null> => {
-    const userRepository = getRepository(User);
-    const user = await userRepository.findOne({ id: id });
-    if (!user) return null;
-    return user;
+export const getUser = async (id:string): Promise<Client | null>  => {
+    const prisma = new PrismaClient()
+    console.log(id)
+    return prisma.client.findUnique({
+        where: {
+            clientcode: id
+        }
+    })
   };

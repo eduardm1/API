@@ -13,13 +13,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const ping_1 = __importDefault(require("../controllers/ping"));
-const client_router_1 = __importDefault(require("./client.router"));
+const client_controller_1 = __importDefault(require("../controllers/client.controller"));
 const router = express_1.default.Router();
-router.get("/ping", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const controller = new ping_1.default();
-    const response = yield controller.getMessage();
+router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const controller = new client_controller_1.default();
+    const response = yield controller.getClients();
     return res.send(response);
 }));
-router.use("/client", client_router_1.default);
+router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const controller = new client_controller_1.default();
+    const response = yield controller.createUser(req.body);
+    return res.send(response);
+}));
+router.get("/:clientCode", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const controller = new client_controller_1.default();
+    const response = yield controller.getUser(req.params.id);
+    if (!response)
+        res.status(404).send({ message: "No user found" });
+    return res.send(response);
+}));
 exports.default = router;

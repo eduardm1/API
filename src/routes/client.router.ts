@@ -1,23 +1,24 @@
 import express from "express";
-import UserController from "../controllers/user.controller";
+import ClientController from "../controllers/client.controller";
 
 const router = express.Router();
 
 router.get("/", async (_req, res) => {
-  const controller = new UserController();
-  const response = await controller.getUsers();
+  const controller = new ClientController();
+  const response = await controller.getClients();
   return res.send(response);
 });
 
 router.post("/", async (req, res) => {
-  const controller = new UserController();
+  const controller = new ClientController();
   const response = await controller.createUser(req.body);
+  
   return res.send(response);
 });
 
-router.get("/:id", async (req, res) => {
-  const controller = new UserController();
-  const response = await controller.getUser(req.params.id);
+router.get("/:clientCode", async (req, res) => {
+  const controller = new ClientController();
+  const response = await controller.getUser(req.params.clientCode);
   if (!response) res.status(404).send({ message: "No user found" });
   return res.send(response);
 });

@@ -5,10 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
-const typeorm_1 = require("typeorm");
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const database_1 = __importDefault(require("./config/database"));
 const routes_1 = __importDefault(require("./routes/"));
 if (process.env.NODE_ENV !== 'production') {
     dotenv_1.default.config();
@@ -25,12 +23,6 @@ app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.defaul
     }
 }));
 app.use(routes_1.default);
-typeorm_1.createConnection(database_1.default).then((_connection) => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-    });
-})
-    .catch((err) => {
-    console.log(`Unable to connect to db ${err}`);
-    process.exit(1);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

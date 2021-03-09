@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://mod3_team_2@mod3-postgres:YcanqUvVVgR9YBVL@mod3-postgres.postgres.database.azure.com:5432/mod3_db_2?schema=ProjectSchema&ssl=true"
+}
+
+model Client {
+  clientcode String @id @db.VarChar(255)
+  street     String? @db.VarChar(255)
+  city       String? @db.VarChar(255)
+  pob        String? @db.VarChar(255)
+  zipcode    String? @db.VarChar(255)
+  pobzipcode String? @db.VarChar(255)
+  longitude  String? @db.VarChar(255)
+  latitude   String? @db.VarChar(255)
+  country    String? @db.VarChar(255)
+  clientname String? @db.VarChar(255)
+}
+
+model CO2Full {
+  emissionsperkm Float
+  transporttype  String     @db.VarChar(255)
+  fe             String     @db.VarChar(255)
+  intervalweight String     @db.VarChar(255)
+  teu            Float      @db.Real
+  Shipment       Shipment[]
+
+  @@id([transporttype, fe, intervalweight, teu])
+}
+
+model Container {
+  containertype   String     @id @db.VarChar(255)
+  lengthcontainer Float      @db.Real
+  widthcontainer  Float      @db.Real
+  heightcontainer Float      @db.Real
+  Shipment        Shipment[]
+}
+
+model NOX {
+  emissionsperkm Float
+  transporttype  String     @db.VarChar(255)
+  intervalweight String     @db.VarChar(255)
+  teu            Float      @db.Real
+  Shipment       Shipment[]
+
+  @@id([transporttype, intervalweight, teu])
+}
+
+model Route {
+  routeid       String @id @db.VarChar(255)
+  modality      String @db.VarChar(255)
+  fueltype      String @db.VarChar(255)
+  TransportType String @db.VarChar(255)
+}
+
+model Shipment {
+  shipmentid         Int       @id
+  sequencenumber     Int
+  date               DateTime  @db.Date
+  modality           String    @db.VarChar(255)
+  distance           Float     @db.Real
+  intervaldistance   String    @db.VarChar(255)
+  emissionprocessing Float     @db.Real
+  fefrom             String    @db.VarChar(255)
+  feto               String    @db.VarChar(255)
+  routeid            String    @db.VarChar(255)
+  fromclient         String    @db.VarChar(255)
+  toclient           String    @db.VarChar(255)
+  containertype      String    @db.VarChar(255)
+  intervalweight     String   @db.VarChar(255)
+  transporttype      String    @db.VarChar(255)
+  shipmentweight     Float     @db.Real
+  teu                Float?    @db.Real
+  co2pershipment     Float?
+  Container          Container @relation(fields: [containertype], references: [containertype])
+  CO2Full            CO2Full   @relation(fields: [transporttype, feto, intervalweight, teu], references: [transporttype, fe, intervalweight, teu])
+  NOX                NOX       @relation(fields: [transporttype, intervalweight, teu], references: [transporttype, intervalweight, teu])
+}

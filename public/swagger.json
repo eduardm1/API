@@ -18,188 +18,62 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Post": {
+			"Client": {
 				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
-					},
-					"title": {
-						"type": "string"
-					},
-					"content": {
-						"type": "string"
-					},
-					"userId": {
-						"type": "number",
-						"format": "double"
-					},
-					"user": {
-						"$ref": "#/components/schemas/User"
-					},
-					"comments": {
-						"items": {
-							"$ref": "#/components/schemas/Comment"
-						},
-						"type": "array"
-					},
-					"createdAt": {
+					"clientname": {
 						"type": "string",
-						"format": "date-time"
+						"nullable": true
 					},
-					"updatedAt": {
+					"country": {
 						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"title",
-					"content",
-					"userId",
-					"user",
-					"comments",
-					"createdAt",
-					"updatedAt"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"User": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
+						"nullable": true
 					},
-					"firstName": {
-						"type": "string"
-					},
-					"lastName": {
-						"type": "string"
-					},
-					"email": {
-						"type": "string"
-					},
-					"posts": {
-						"items": {
-							"$ref": "#/components/schemas/Post"
-						},
-						"type": "array"
-					},
-					"comments": {
-						"items": {
-							"$ref": "#/components/schemas/Comment"
-						},
-						"type": "array"
-					},
-					"createdAt": {
+					"latitude": {
 						"type": "string",
-						"format": "date-time"
+						"nullable": true
 					},
-					"updatedAt": {
+					"longitude": {
 						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"firstName",
-					"lastName",
-					"email",
-					"posts",
-					"comments",
-					"createdAt",
-					"updatedAt"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"Comment": {
-				"properties": {
-					"id": {
-						"type": "number",
-						"format": "double"
+						"nullable": true
 					},
-					"content": {
-						"type": "string"
-					},
-					"userId": {
-						"type": "number",
-						"format": "double"
-					},
-					"user": {
-						"$ref": "#/components/schemas/User"
-					},
-					"postId": {
-						"type": "number",
-						"format": "double"
-					},
-					"post": {
-						"$ref": "#/components/schemas/Post"
-					},
-					"createdAt": {
+					"pobzipcode": {
 						"type": "string",
-						"format": "date-time"
+						"nullable": true
 					},
-					"updatedAt": {
+					"zipcode": {
 						"type": "string",
-						"format": "date-time"
-					}
-				},
-				"required": [
-					"id",
-					"content",
-					"userId",
-					"user",
-					"postId",
-					"post",
-					"createdAt",
-					"updatedAt"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"IUserPayload": {
-				"properties": {
-					"firstName": {
-						"type": "string"
+						"nullable": true
 					},
-					"lastName": {
-						"type": "string"
+					"pob": {
+						"type": "string",
+						"nullable": true
 					},
-					"email": {
+					"city": {
+						"type": "string",
+						"nullable": true
+					},
+					"street": {
+						"type": "string",
+						"nullable": true
+					},
+					"clientcode": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"firstName",
-					"lastName",
-					"email"
+					"clientname",
+					"country",
+					"latitude",
+					"longitude",
+					"pobzipcode",
+					"zipcode",
+					"pob",
+					"city",
+					"street",
+					"clientcode"
 				],
 				"type": "object",
-				"additionalProperties": false
-			},
-			"ICommentPayload": {
-				"properties": {
-					"content": {
-						"type": "string"
-					},
-					"userId": {
-						"type": "number",
-						"format": "double"
-					},
-					"postId": {
-						"type": "number",
-						"format": "double"
-					}
-				},
-				"required": [
-					"content",
-					"userId",
-					"postId"
-				],
-				"type": "object",
-				"additionalProperties": false
+				"description": "Model Client"
 			}
 		},
 		"securitySchemes": {}
@@ -233,9 +107,9 @@
 				"parameters": []
 			}
 		},
-		"/posts": {
+		"/client": {
 			"get": {
-				"operationId": "GetPosts",
+				"operationId": "GetClients",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -243,7 +117,7 @@
 							"application/json": {
 								"schema": {
 									"items": {
-										"$ref": "#/components/schemas/Post"
+										"$ref": "#/components/schemas/Client"
 									},
 									"type": "array"
 								}
@@ -252,68 +126,7 @@
 					}
 				},
 				"tags": [
-					"Post"
-				],
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/posts/{id}": {
-			"get": {
-				"operationId": "GetPost",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/Post"
-										}
-									],
-									"nullable": true
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Post"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/users": {
-			"get": {
-				"operationId": "GetUsers",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/User"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"User"
+					"Client"
 				],
 				"security": [],
 				"parameters": []
@@ -321,19 +134,12 @@
 			"post": {
 				"operationId": "CreateUser",
 				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/User"
-								}
-							}
-						}
+					"204": {
+						"description": "No content"
 					}
 				},
 				"tags": [
-					"User"
+					"Client"
 				],
 				"security": [],
 				"parameters": [],
@@ -342,14 +148,14 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/IUserPayload"
+								"$ref": "#/components/schemas/Client"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/users/{id}": {
+		"/client/{clientCode}": {
 			"get": {
 				"operationId": "GetUser",
 				"responses": {
@@ -360,7 +166,7 @@
 								"schema": {
 									"allOf": [
 										{
-											"$ref": "#/components/schemas/User"
+											"$ref": "#/components/schemas/Client"
 										}
 									],
 									"nullable": true
@@ -370,104 +176,13 @@
 					}
 				},
 				"tags": [
-					"User"
+					"Client"
 				],
 				"security": [],
 				"parameters": [
 					{
 						"in": "path",
-						"name": "id",
-						"required": true,
-						"schema": {
-							"type": "string"
-						}
-					}
-				]
-			}
-		},
-		"/comments": {
-			"get": {
-				"operationId": "GetComments",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"items": {
-										"$ref": "#/components/schemas/Comment"
-									},
-									"type": "array"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Comment"
-				],
-				"security": [],
-				"parameters": []
-			},
-			"post": {
-				"operationId": "CreateComment",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/Comment"
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Comment"
-				],
-				"security": [],
-				"parameters": [],
-				"requestBody": {
-					"required": true,
-					"content": {
-						"application/json": {
-							"schema": {
-								"$ref": "#/components/schemas/ICommentPayload"
-							}
-						}
-					}
-				}
-			}
-		},
-		"/comments/{id}": {
-			"get": {
-				"operationId": "GetComment",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"allOf": [
-										{
-											"$ref": "#/components/schemas/Comment"
-										}
-									],
-									"nullable": true
-								}
-							}
-						}
-					}
-				},
-				"tags": [
-					"Comment"
-				],
-				"security": [],
-				"parameters": [
-					{
-						"in": "path",
-						"name": "id",
+						"name": "clientCode",
 						"required": true,
 						"schema": {
 							"type": "string"
