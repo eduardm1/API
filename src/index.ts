@@ -1,10 +1,8 @@
 import express, {Application} from 'express';
 import morgan from 'morgan';
-import { createConnection } from "typeorm";
 import swaggerUI from 'swagger-ui-express';
 import dotEnv from 'dotenv';
 
-import dbConfig from './config/database';
 import Router from './routes/';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -32,12 +30,8 @@ app.use(
 
 app.use(Router);
 
-createConnection(dbConfig).then((_connection) => {
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-})
-.catch((err) => {
-    console.log(`Unable to connect to db ${err}`);
-    process.exit(1);
-})
+

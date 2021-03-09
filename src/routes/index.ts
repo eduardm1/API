@@ -1,8 +1,8 @@
 import express from "express";
 import PingController from "../controllers/ping";
-import PostRouter from "./post.router";
-import UserRouter from "./user.router";
-import CommentRouter from "./comment.router";
+import ClientRouter from "./client.router";
+import RouteRouter from './routes.router';
+import CO2Router from './co2.router';
 
 const router = express.Router();
 
@@ -12,8 +12,8 @@ router.get("/ping", async (_req, res) => {
   return res.send(response);
 });
 
-router.use("/users", UserRouter);
-router.use("/posts", PostRouter);
-router.use("/comments", CommentRouter);
+router.use("/client", ClientRouter);
+router.use("/route", RouteRouter);
+router.use("/co2", CO2Router);
 
 export default router;
