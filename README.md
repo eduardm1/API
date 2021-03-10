@@ -34,6 +34,7 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
+  <a href="#why">Why do I want to use an API?</a> &#xa0; | &#xa0; 
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
@@ -46,7 +47,13 @@
 
 ## :dart: About ##
 
-Describe your project
+This project is intended to serve as a start for a REST API for the 3rd module, Business Intelligence and IT, within the University of Twente. 
+
+Even though the API routes that are created within this project are probably not fit for your case, this README should be enough to help you design it for your own case.
+
+<img alt="License" src="./what-is-an-api.png">
+
+## :question: WHY ##
 
 ## :sparkles: Features ##
 
