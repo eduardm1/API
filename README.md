@@ -123,19 +123,19 @@ $ npm run dev
 
 ## :boom: Make the API fit to your case ##
 
-  ### Overview ###
+  ### :boom: Overview ###
 
 Now you might be wondering what did prisma introspect and prisma generate do.
 
 By using prisma introspect, you told to prisma to connect to the database, fetch the structure and generate a model according to the structure.
 The model can be found in the root folder in the schema.prisma file.
 
-  ### But I have errors in the schema.prisma file ###
+  ### :boom: But I have errors in the schema.prisma file ###
 
   There might be the case that you have missmatches between the type of a foreign key that references the primary key in another table. 
   (If people will encounter other problems, I will add here)
 
-  ### I have a bunch of errors now in the .ts files ###
+  ### :boom: I have a bunch of errors now in the .ts files ###
 
   Now that you have updated the schema to match your database, you will get a bunch of errors and that is perfect :D.
 
@@ -145,15 +145,15 @@ The model can be found in the root folder in the schema.prisma file.
 
   First, let's understand the structure of the project: 
 
-  #### src/index.ts ###
+  #### :boom: src/index.ts ###
     
   This is the file that gets executed by the npm run dev. It sets up the local server, the route towards the docs (we'll speak about it later) and the Routes for our API.  
 
-  #### src/routes/index.ts ###
+  #### :boom: src/routes/index.ts ###
 
   This file is the entry point for all your routes. It should collect all of them, add them in the express route object and export it.
 
-  #### src/routes/client.ts ###
+  #### :boom: src/routes/client.ts ###
   This file is the place where you add the routes to the server and define the type of REST operation. 
   
   I hope that the GET request and POST request are self explanatory and I will explain how the path parameter works.
@@ -170,7 +170,7 @@ The model can be found in the root folder in the schema.prisma file.
   Because clientCode has the : in front, it will be dynamic. So, in our path we can write localhost:8000/client/someId and we can retrieve the client by it's id from the database.
   In the controller.getClient(req.params.clientCode) make sure that the req.params.clientCode matches your route.
 
-  #### src/controllers/client.controller.ts ####
+  #### :boom: src/controllers/client.controller.ts ####
 
   This file will be mainly used to control how swaggerUI works. We are using the tsoa library to set it up. 
 
@@ -187,7 +187,7 @@ The model can be found in the root folder in the schema.prisma file.
    2.  We use the TypeScript's type check and say that clientCode MUST be a string, nothing else
    3. We use the TypeScript's type check and say that the return of this function will be a Promise that will hold a Client (our type from the prisma model) or it is null, and nothing else.
    
-  #### src/repositories/client.repository.js ####
+  #### :boom: src/repositories/client.repository.js ####
   
   This file contains the queries to the database using the PrismaClient.
   
@@ -207,7 +207,7 @@ The model can be found in the root folder in the schema.prisma file.
   We instanitate the prisma client and then we do prisma.client.findUnique({}). this will find 1 value from your client model based on the where condition. 
   The where condition, in our case, is the clientcode we sent as a parameter.
 
-  #### Sum it up ####
+  #### :pencil2: Sum it up ####
 
   To sum it up, I will leave a schema here that should explain the flow of the data through the application from the client to the database.
 
