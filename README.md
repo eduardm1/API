@@ -1,5 +1,4 @@
 <div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="Api" />
 
   &#xa0;
 
@@ -36,7 +35,6 @@
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
   <a href="#why">Why do I want to use an API?</a> &#xa0; | &#xa0;
   <a href="#why">How does an API work?</a> &#xa0; | &#xa0; 
-  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
@@ -72,21 +70,15 @@ An API endpoint refers to the touchpoints of interaction between an API and anot
 
 For more information about REST operations, please check: https://learning.postman.com/docs/getting-started/sending-the-first-request/.
 
-## :sparkles: Features ##
-
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
-
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
 - [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
+- [Express](https://expressjs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Prisma](https://www.prisma.io/)
+- [Tsoa](https://github.com/lukeautry/tsoa)
 
 ## :white_check_mark: Requirements ##
 
