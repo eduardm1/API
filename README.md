@@ -123,8 +123,8 @@ The model can be found in the root folder in the schema.prisma file.
 
   ### But I have errors in the schema.prisma file ###
 
-    There might be the case that you have missmatches between the type of a foreign key that references the primary key in another table. 
-      (If people will encounter other problems, I will add here)
+  There might be the case that you have missmatches between the type of a foreign key that references the primary key in another table. 
+  (If people will encounter other problems, I will add here)
 
   
 
