@@ -56,13 +56,21 @@ Even though the API routes that are created within this project are probably not
 
 ## :question: Why an API? ##
 
-The purpose of the API is to sit between your application (e.g. your Mendix application) and your database (e.g. the PostgreSQL hosted on Azure).
+APIs help software developers to streamline and shorten the application building process by eliminating frequently repeated program development processes. In short, they help you not to keep reinventing the wheel every time you are using the same procedure to build applications. 
+
+The purpose of this API is to sit between your application (e.g. your Mendix application) and your database (e.g. the PostgreSQL hosted on Azure).
 
 By doing so, we can easily retrieve the data from the database and manipulate it as we like. If not this API, we would have to manually import the CSVs in the modeler and we don't want that, right?
 
 <img alt="License" src="./what-is-an-api.png">
 
-## :how: How does an API work? ##
+## :question: How does an API work? ##
+
+An API request occurs when a developer adds an endpoint to a URL and makes a call to the server.
+
+An API endpoint refers to the touchpoints of interaction between an API and another system.  An endpoint provides the location where an API accesses the resources they need. An API works by requesting information from a server and then receiving a response after that. 
+
+For more information about REST operations, please check: https://learning.postman.com/docs/getting-started/sending-the-first-request/.
 
 ## :sparkles: Features ##
 
