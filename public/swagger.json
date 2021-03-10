@@ -6,18 +6,6 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"PingResponse": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"Client": {
 				"properties": {
 					"clientname": {
@@ -74,6 +62,60 @@
 				],
 				"type": "object",
 				"description": "Model Client"
+			},
+			"Routes": {
+				"properties": {
+					"TransportType": {
+						"type": "string"
+					},
+					"fueltype": {
+						"type": "string"
+					},
+					"modality": {
+						"type": "string"
+					},
+					"routeid": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"TransportType",
+					"fueltype",
+					"modality",
+					"routeid"
+				],
+				"type": "object",
+				"description": "Model Routes"
+			},
+			"CO2Full": {
+				"properties": {
+					"teu": {
+						"type": "number",
+						"format": "double"
+					},
+					"intervalweight": {
+						"type": "string"
+					},
+					"fe": {
+						"type": "string"
+					},
+					"transporttype": {
+						"type": "string"
+					},
+					"emissionsperkm": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"teu",
+					"intervalweight",
+					"fe",
+					"transporttype",
+					"emissionsperkm"
+				],
+				"type": "object",
+				"description": "Model CO2Full"
 			}
 		},
 		"securitySchemes": {}
@@ -88,25 +130,6 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/ping": {
-			"get": {
-				"operationId": "GetMessage",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/PingResponse"
-								}
-							}
-						}
-					}
-				},
-				"security": [],
-				"parameters": []
-			}
-		},
 		"/client": {
 			"get": {
 				"operationId": "GetClients",
@@ -132,7 +155,7 @@
 				"parameters": []
 			},
 			"post": {
-				"operationId": "CreateUser",
+				"operationId": "CreateClient",
 				"responses": {
 					"204": {
 						"description": "No content"
@@ -157,7 +180,7 @@
 		},
 		"/client/{clientCode}": {
 			"get": {
-				"operationId": "GetUser",
+				"operationId": "GetClient",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -183,6 +206,198 @@
 					{
 						"in": "path",
 						"name": "clientCode",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/Route": {
+			"get": {
+				"operationId": "GetRoutes",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Routes"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Route"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateRoute",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"Route"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Routes"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/Route/{routeId}": {
+			"get": {
+				"operationId": "GetRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Routes"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Route"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "routeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/co2": {
+			"get": {
+				"operationId": "GetCo2s",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/CO2Full"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CO2"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCo2",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"tags": [
+					"CO2"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CO2Full"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/co2/{fe}/{intervalweight}/{teu}/{transporttype}": {
+			"get": {
+				"operationId": "GetCo2",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/CO2Full"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CO2"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "fe",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "intervalweight",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "teu",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "transporttype",
 						"required": true,
 						"schema": {
 							"type": "string"

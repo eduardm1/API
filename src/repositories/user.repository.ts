@@ -14,14 +14,14 @@ export const getClients = async (): Promise<Client[]> => {
     
 }
 
-export const createUser = async (payload: Client) => {
+export const createClient = async (payload: Client) => {
     const prisma = new PrismaClient();
     await prisma.client.create({
         data: payload
     });
 }
 
-export const getUser = async (id:string): Promise<Client | null>  => {
+export const getClient = async (id:string): Promise<Client | null>  => {
     const prisma = new PrismaClient()
     console.log(id)
     return prisma.client.findUnique({

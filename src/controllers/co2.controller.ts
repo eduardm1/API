@@ -1,14 +1,14 @@
-import { Prisma, CO2Full } from "@prisma/client";
-import { Get, Route as TsoaRoute, Tags, Post, Body, Path } from "tsoa";
+import {  CO2Full } from "@prisma/client";
+import { Get, Route, Tags, Post, Body, Path } from "tsoa";
 import {
  createCo2,
  getCo2,
  getCo2s
 } from "../repositories/co2.repository";
 
-@TsoaRoute("CO2")
+@Route("co2")
 @Tags("CO2")
-export default class RouteController {
+export default class CO2Controller {
   @Get("/")
   public async getCo2s(): Promise<CO2Full[]> {
     return getCo2s();

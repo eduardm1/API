@@ -11,14 +11,14 @@ router.get("/", async (_req, res) => {
 
 router.post("/", async (req, res) => {
   const controller = new ClientController();
-  const response = await controller.createUser(req.body);
+  const response = await controller.createClient(req.body);
   
   return res.send(response);
 });
 
 router.get("/:clientCode", async (req, res) => {
   const controller = new ClientController();
-  const response = await controller.getUser(req.params.clientCode);
+  const response = await controller.getClient(req.params.clientCode);
   if (!response) res.status(404).send({ message: "No user found" });
   return res.send(response);
 });
