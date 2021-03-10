@@ -34,13 +34,14 @@
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0; 
-  <a href="#why">Why do I want to use an API?</a> &#xa0; | &#xa0; 
+  <a href="#why">Why do I want to use an API?</a> &#xa0; | &#xa0;
+  <a href="#why">How does an API work?</a> &#xa0; | &#xa0; 
   <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
   <a href="#rocket-technologies">Technologies</a> &#xa0; | &#xa0;
   <a href="#white_check_mark-requirements">Requirements</a> &#xa0; | &#xa0;
   <a href="#checkered_flag-starting">Starting</a> &#xa0; | &#xa0;
   <a href="#memo-license">License</a> &#xa0; | &#xa0;
-  <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">Author</a>
+  <a href="https://github.com/eduardm1" target="_blank">Author</a>
 </p>
 
 <br>
@@ -51,9 +52,17 @@ This project is intended to serve as a start for a REST API for the 3rd module, 
 
 Even though the API routes that are created within this project are probably not fit for your case, this README should be enough to help you design it for your own case.
 
+
+
+## :question: Why an API? ##
+
+The purpose of the API is to sit between your application (e.g. your Mendix application) and your database (e.g. the PostgreSQL hosted on Azure).
+
+By doing so, we can easily retrieve the data from the database and manipulate it as we like. If not this API, we would have to manually import the CSVs in the modeler and we don't want that, right?
+
 <img alt="License" src="./what-is-an-api.png">
 
-## :question: WHY ##
+## :how: How does an API work? ##
 
 ## :sparkles: Features ##
 
