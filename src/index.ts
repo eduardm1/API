@@ -5,19 +5,22 @@ import dotEnv from 'dotenv';
 
 import Router from './routes/';
 
+/**
+ * If the NODE_ENV is not production, it will use everything from the .env
+ */
 if (process.env.NODE_ENV !== 'production') {
     dotEnv.config();
-    console.log('configured');
 }
-
 const PORT = process.env.PORT || 8000;
 
+//Instantiate the express server. 
 const app: Application = express();
 
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.static("public"));
 
+//Create the route for the swaggerUI
 app.use(
     "/docs",
     swaggerUI.serve,
@@ -28,9 +31,10 @@ app.use(
     })
 );
 
+//Set up the routes defined in /routes/index.ts
 app.use(Router);
 
-
+//Start the server on port ${PORT}
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
