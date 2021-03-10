@@ -96,21 +96,44 @@ $ cd api
 # Install dependencies
 $ npm install
 
+# Setup the .env
+In the current folder, you will see that there is a env.sample file. Rename it to .env and add the variables to match your databes login.
+If you wish to use a version control, the .env file will not be added, automatically, so do not worry about compromising your credentials.
+
+# Synchronize the local model with the postgres database
+$ prisma instrospect
+
 # Generate the prisma client
 $ prisma generate
 
-# run the project
+# run the project - might not work right away
 $ npm run dev
 
-# The server will initialize in the <http://localhost:3000>
+# The server will initialize in the <http://localhost:8000>
 ```
+
+## :boom: Make the API fit to your case ##
+
+  ### Overview ###
+
+Now you might be wondering what did prisma introspect and prisma generate do.
+
+By using prisma introspect, you told to prisma to connect to the database, fetch the structure and generate a model according to the structure.
+The model can be found in the root folder in the schema.prisma file.
+
+  ### But I have errors in the schema.prisma file ###
+
+    There might be the case that you have missmatches between the type of a foreign key that references the primary key in another table. 
+      (If people will encounter other problems, I will add here)
+
+  
 
 ## :memo: License ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/eduardm1" target="_blank">Eduard Modreanu</a>
 
 &#xa0;
 
