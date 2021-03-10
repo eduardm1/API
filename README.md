@@ -15,7 +15,7 @@
 
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/eduardm1/api?color=56BEB8">
 
-  <img alt="License" src="https://img.shields.io/github/license/eduardm1/API/api?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/eduardm1/API">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/{{YOUR_GITHUB_USERNAME}}/api?color=56BEB8" /> -->
 
