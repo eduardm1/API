@@ -56,9 +56,10 @@ Even though the API routes that are created within this project are probably not
 
 APIs help software developers to streamline and shorten the application building process by eliminating frequently repeated program development processes. In short, they help you not to keep reinventing the wheel every time you are using the same procedure to build applications. 
 
-The purpose of this API is to sit between your application (e.g. your Mendix application) and your database (e.g. the PostgreSQL hosted on Azure).
+The purpose of this API for your project is to sit between your application (e.g. your Mendix application) and your database (e.g. the PostgreSQL hosted on Azure).
 
-By doing so, we can easily retrieve the data from the database and manipulate it as we like. If not this API, we would have to manually import the CSVs in the modeler and we don't want that, right?
+Integrating this API will take your application to the next level. Resulting in data that is coming straight from the PostgreSQL database and therefore always up-to-date, instead of manually imported and therefore outdated data.
+If not for this API, your app will be outdated due to the fact that we can't use the beautiful database created in the first part of the project, and we don't want that, right?
 
 <img alt="License" src="./what-is-an-api.png">
 
