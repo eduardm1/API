@@ -1,4 +1,4 @@
-import {  CO2Full, Prisma, PrismaClient,} from '@prisma/client'
+import {  CO2Full, PrismaClient,} from '@prisma/client'
 
 
 export const getCo2s = async (): Promise<CO2Full[]> => {
