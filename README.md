@@ -112,7 +112,21 @@ $ npm run dev
 # The server will initialize in the <http://localhost:8000>
 ```
 
-## :weight: Make the API fit to your case ##
+## :boom: Make the API fit to your case ##
+
+  ### Overview ###
+
+Now you might be wondering what did prisma introspect and prisma generate do.
+
+By using prisma introspect, you told to prisma to connect to the database, fetch the structure and generate a model according to the structure.
+The model can be found in the root folder in the schema.prisma file.
+
+  ### But I have errors in the schema.prisma file ###
+
+    There might be the case that you have missmatches between the type of a foreign key that references the primary key in another table. 
+      (If people will encounter other problems, I will add here)
+
+  
 
 ## :memo: License ##
 
