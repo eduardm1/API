@@ -123,7 +123,8 @@ $ npm run dev
 ```
 
 ## :boom: Make the API fit to your case ##
-
+A few adjustements have to be made to make the API work on your project case.
+Don't panic, the steps and scenarios below will help you to do so.
   ### :boom: Overview ###
 
 Now you might be wondering what did prisma introspect and prisma generate do.
