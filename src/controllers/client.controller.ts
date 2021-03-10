@@ -4,8 +4,10 @@ import {
   getClients,
   createClient,
   getClient,
-} from "../repositories/user.repository";
-
+} from "../repositories/client.repository";
+/**
+ * The controller class is used to control the SwaggerUI
+ */
 @Route("client")
 @Tags("Client")
 export default class ClientController {

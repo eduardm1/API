@@ -70,6 +70,15 @@ An API endpoint refers to the touchpoints of interaction between an API and anot
 
 For more information about REST operations, please check: https://learning.postman.com/docs/getting-started/sending-the-first-request/.
 
+
+## :notebook: What is TypeScript? ##
+
+I would recommend reading https://www.typescriptlang.org/docs/handbook/typescript-from-scratch. It will give you a good understanding of what it is, how it works and why is it useful.
+
+## :notebook: What is Prisma? ##
+
+Without getting into too much details (for those who want, there is a link below), Prisma is a tool that will conveniently synchronize our Postgres, update it and give us a set of tools to manipulate the database without writing literal SQL queries. 
+
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
@@ -126,11 +135,87 @@ The model can be found in the root folder in the schema.prisma file.
   There might be the case that you have missmatches between the type of a foreign key that references the primary key in another table. 
   (If people will encounter other problems, I will add here)
 
+  ### I have a bunch of errors now in the .ts files ###
+
+  Now that you have updated the schema to match your database, you will get a bunch of errors and that is perfect :D.
+
+  You will find comments throughout the code.
+
+  For the explanation, I will always refer to the Client object assuming that everybody has some sort of Client/User. You can safetly remove the co2.ts and route.ts files and all the references to them.
+
+  First, let's understand the structure of the project: 
+
+  #### src/index.ts ###
+    
+  This is the file that gets executed by the npm run dev. It sets up the local server, the route towards the docs (we'll speak about it later) and the Routes for our API.  
+
+  #### src/routes/index.ts ###
+
+  This file is the entry point for all your routes. It should collect all of them, add them in the express route object and export it.
+
+  #### src/routes/client.ts ###
+  This file is the place where you add the routes to the server and define the type of REST operation. 
   
+  I hope that the GET request and POST request are self explanatory and I will explain how the path parameter works.
+
+  ```javascript
+     router.get("/:clientCode", async (req, res) => {
+    const controller = new ClientController();
+    const response = await controller.getClient(req.params.clientCode);
+    if (!response) res.status(404).send({ message: "No user found" });
+    return res.send(response);
+  });
+  ```
+  By doing router.get("/:clientCode") we are setting up a route to our server so it will be localhost:8000/client/:clientCode.
+  Because clientCode has the : in front, it will be dynamic. So, in our path we can write localhost:8000/client/someId and we can retrieve the client by it's id from the database.
+  In the controller.getClient(req.params.clientCode) make sure that the req.params.clientCode matches your route.
+
+  #### src/controllers/client.controller.ts ####
+
+  This file will be mainly used to control how swaggerUI works. We are using the tsoa library to set it up. 
+
+  Lets look at an example 
+  ```javascript
+    @Get("/:clientCode")
+  public async getClient(@Path() clientCode: string): Promise<Client | null> {
+    return getClient(clientCode);
+  }
+  ```
+  In this example, we are using @Get("/:clientcode") which will tell to swaggerUI to show this path as a GET with the parameter :clientCode.
+  In the getClient(@Path() clientCode: string): Promise<Client | null> there are 3 things happening.
+   1. We tell to swaggerUi that clientCode is our path parameter 
+   2.  We use the TypeScript's type check and say that clientCode MUST be a string, nothing else
+   3. We use the TypeScript's type check and say that the return of this function will be a Promise that will hold a Client (our type from the prisma model) or it is null, and nothing else.
+   
+  #### src/repositories/client.repository.js ####
+  
+  This file contains the queries to the database using the PrismaClient.
+  
+  ```javascript
+  export const getClient = async (id:string): Promise<Client | null>  => {
+    const prisma = new PrismaClient()
+    return prisma.client.findUnique({
+        where: {
+            clientcode: id
+        }
+    })
+  };
+  ```
+
+  By using the same logic as from the previous file, id must be a string, and return type must be a Promise holding a Client or null.
+
+  We instanitate the prisma client and then we do prisma.client.findUnique({}). this will find 1 value from your client model based on the where condition. 
+  The where condition, in our case, is the clientcode we sent as a parameter.
+
+  #### Sum it up ####
+
+  To sum it up, I will leave a schema here that should explain the flow of the data through the application from the client to the database.
+
+    <img alt="Schema" src="./flowchart.jpg">
 
 ## :memo: License ##
 
-This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under licens1e from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
 Made with :heart: by <a href="https://github.com/eduardm1" target="_blank">Eduard Modreanu</a>

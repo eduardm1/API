@@ -1,12 +1,6 @@
-import { Client,  Prisma, PrismaClient,} from '@prisma/client'
+import { Client, PrismaClient,} from '@prisma/client'
 
-export interface IUserPayload {
-    firstName: string;
-    lastName: string;
-    email: string;
-}
-
-
+//get all the clients from the database.
 export const getClients = async (): Promise<Client[]> => {
     // console.log(userRepository.metadata);
     const prisma = new PrismaClient()
@@ -14,6 +8,7 @@ export const getClients = async (): Promise<Client[]> => {
     
 }
 
+//create a client in the database based on the body of the POST request
 export const createClient = async (payload: Client) => {
     const prisma = new PrismaClient();
     await prisma.client.create({
@@ -21,6 +16,7 @@ export const createClient = async (payload: Client) => {
     });
 }
 
+//get a single client based on it's id from the URL parameter
 export const getClient = async (id:string): Promise<Client | null>  => {
     const prisma = new PrismaClient()
     console.log(id)
