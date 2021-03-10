@@ -88,16 +88,19 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 
 ```bash
 # Clone this project
-$ git clone https://github.com/{{YOUR_GITHUB_USERNAME}}/api
+$ git clone https://github.com/eduardm1/API
 
 # Access
 $ cd api
 
 # Install dependencies
-$ yarn
+$ npm install
 
-# Run the project
-$ yarn start
+# Generate the prisma client
+$ prisma generate
+
+# run the project
+$ npm run dev
 
 # The server will initialize in the <http://localhost:3000>
 ```
