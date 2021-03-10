@@ -211,7 +211,7 @@ The model can be found in the root folder in the schema.prisma file.
 
   To sum it up, I will leave a schema here that should explain the flow of the data through the application from the client to the database.
 
-    <img alt="Schema" src="./flowchart.jpg">
+  <img alt="Schema" src="./flowchart.jpg">
 
 ## :memo: License ##
 
