@@ -96,21 +96,30 @@ $ cd api
 # Install dependencies
 $ npm install
 
+# Setup the .env
+In the current folder, you will see that there is a env.sample file. Rename it to .env and add the variables to match your databes login.
+If you wish to use a version control, the .env file will not be added, automatically, so do not worry about compromising your credentials.
+
+# Synchronize the local model with the postgres database
+$ prisma instrospect
+
 # Generate the prisma client
 $ prisma generate
 
-# run the project
+# run the project - might not work right away
 $ npm run dev
 
-# The server will initialize in the <http://localhost:3000>
+# The server will initialize in the <http://localhost:8000>
 ```
+
+## :weight: Make the API fit to your case ##
 
 ## :memo: License ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
-Made with :heart: by <a href="https://github.com/{{YOUR_GITHUB_USERNAME}}" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/eduardm1" target="_blank">Eduard Modreanu</a>
 
 &#xa0;
 

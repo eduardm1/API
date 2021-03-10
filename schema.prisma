@@ -4,11 +4,11 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://mod3_team_2@mod3-postgres:YcanqUvVVgR9YBVL@mod3-postgres.postgres.database.azure.com:5432/mod3_db_2?schema=ProjectSchema&ssl=true"
+  url      = env("DATABASE_URL")
 }
 
 model Client {
-  clientcode String @id @db.VarChar(255)
+  clientcode String  @id @db.VarChar(255)
   street     String? @db.VarChar(255)
   city       String? @db.VarChar(255)
   pob        String? @db.VarChar(255)
@@ -49,13 +49,6 @@ model NOX {
   @@id([transporttype, intervalweight, teu])
 }
 
-model Routes {
-  routeid       String @id @db.VarChar(255)
-  modality      String @db.VarChar(255)
-  fueltype      String @db.VarChar(255)
-  TransportType String @db.VarChar(255)
-}
-
 model Shipment {
   shipmentid         Int       @id
   sequencenumber     Int
@@ -70,7 +63,7 @@ model Shipment {
   fromclient         String    @db.VarChar(255)
   toclient           String    @db.VarChar(255)
   containertype      String    @db.VarChar(255)
-  intervalweight     String   @db.VarChar(255)
+  intervalweight     String?   @db.VarChar(255)
   transporttype      String    @db.VarChar(255)
   shipmentweight     Float     @db.Real
   teu                Float?    @db.Real
@@ -78,4 +71,11 @@ model Shipment {
   Container          Container @relation(fields: [containertype], references: [containertype])
   CO2Full            CO2Full   @relation(fields: [transporttype, feto, intervalweight, teu], references: [transporttype, fe, intervalweight, teu])
   NOX                NOX       @relation(fields: [transporttype, intervalweight, teu], references: [transporttype, intervalweight, teu])
+}
+
+model Route {
+  routeid       String @id @db.VarChar(255)
+  modality      String @db.VarChar(255)
+  fueltype      String @db.VarChar(255)
+  TransportType String @db.VarChar(255)
 }
