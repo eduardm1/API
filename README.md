@@ -107,7 +107,7 @@ $ cd api
 $ npm install
 
 # Setup the .env
-In the current folder, you will see that there is a env.sample file. Rename it to .env and add the variables to match your databes login.
+In the root folder, you will see that there is a env.sample file. Open it and follow the steps.
 If you wish to use a version control, the .env file will not be added, automatically, so do not worry about compromising your credentials.
 
 # Synchronize the local model with the postgres database
