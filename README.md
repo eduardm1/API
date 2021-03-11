@@ -111,13 +111,13 @@ In the root folder, you will see that there is a env.sample file. Open it and fo
 If you wish to use a version control, the .env file will not be added, automatically, so do not worry about compromising your credentials.
 
 # Synchronize the local model with the postgres database
-$ prisma instrospect
+$ npx prisma introspect
 
 #Push the migration of the db
-$ prisma db push --preview-feature
+$ npx prisma db push --preview-feature
 
 # Generate the prisma client
-$ prisma generate
+$ npx prisma generate
 
 # run the project - might not work right away
 $ npm run dev
