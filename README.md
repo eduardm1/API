@@ -113,6 +113,9 @@ If you wish to use a version control, the .env file will not be added, automatic
 # Synchronize the local model with the postgres database
 $ prisma instrospect
 
+#Push the migration of the db
+$ prisma db push --preview-feature
+
 # Generate the prisma client
 $ prisma generate
 
