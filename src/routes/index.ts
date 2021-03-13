@@ -7,7 +7,7 @@ import CO2Router from './co2.router';
 const router = express.Router();
 
 // Set up the localhost:8000/client
-router.use("/client", ClientRouter);
+router.use("/client", ClientRouter)
 router.use("/route", RouteRouter);
 router.use("/co2", CO2Router);
 
