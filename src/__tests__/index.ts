@@ -5,6 +5,9 @@ import { getCo2 } from './co2/get_co2'
 import { postCo2 } from './co2/post_co2'
 import { deleteCo2 } from './co2/delete_co2'
 import { PrismaClient } from '@prisma/client'
+import { getRoute } from './route/get_route';
+import { postRoute } from './route/post_route';
+import { deleteRoute } from './route/delete_route';
 
 declare global
 {
@@ -29,6 +32,13 @@ describe('CO2 tests', () =>
 
     getCo2()
     deleteCo2()
+})
+
+describe("Route tests", () =>
+{
+    postRoute()
+    getRoute()
+    deleteRoute()
 })
 
 globalThis.prisma.$disconnect

@@ -23,7 +23,8 @@ export const getClient = async (id:string): Promise<Client | null>  => {
     })
   };
 
-  export const  deleteClient = async (id: string): Promise<Client | null> => {
+export const deleteClient = async (id: string): Promise<Client | null> =>
+{
     return await globalThis.prisma.client.delete({
         where:{
             clientcode: id
