@@ -282,8 +282,15 @@
 			"post": {
 				"operationId": "CreateRoute",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Routes"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -306,6 +313,40 @@
 		"/Route/{routeId}": {
 			"get": {
 				"operationId": "GetRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Routes"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Route"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "routeId",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteCo2",
 				"responses": {
 					"200": {
 						"description": "Ok",
