@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
     return res.send(response);
   }
   catch(err) {
+    
     res.status(404).send({message: "No client  was created"})
   }
 });
@@ -39,7 +40,9 @@ router.get("/:clientCode", async (req, res) => {
     const response = await controller.getClient(req.params.clientCode);
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
-  } catch(err) {
+  } catch (err)
+  {
+    console.log(err);
     res.status(404).send({ message: "No client found" });
   }
 });
@@ -51,7 +54,9 @@ router.delete("/:clientCode", async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
 
-  } catch(err) {
+  } catch (err)
+  {
+    console.log(err);
     res.status(404).send({message: "No client found"});
   }
 })

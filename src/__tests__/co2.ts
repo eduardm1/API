@@ -8,7 +8,7 @@ describe('CO2 test', () =>
 {
     let app: Application, server: Server;
 
-    beforeAll(done =>
+    beforeEach(done =>
     {
         app = express();
         app.use(express.json());
@@ -19,21 +19,22 @@ describe('CO2 test', () =>
         server.listen(done);
     })
 
-    afterAll((done) =>
+    afterEach((done) =>
     {
         server.close(done);
     })
 
     it('should return 200 & valid response if request param list is empity', async done =>
     {
-       const data = await request(app)
+        await request(app)
             .get(`/co2`)
             .expect('Content-Type', /json/)
             .expect(200)
-         
+            .then((res) =>
+            {
                 try
                 {
-                    expect(data.body).not.toBeNull
+                    expect(res.body).not.toBeNull
                 }
                 catch (err)
                 {
@@ -42,10 +43,12 @@ describe('CO2 test', () =>
                 }
                 done()
             })
+               
+            })
 
     it('should create one co2 & return it & return 200', async done =>
     {
-       const data = await request(app)
+       await request(app)
             .post(`/co2`)
             .set('Content-Type', 'application/json')
             .send({
@@ -57,63 +60,70 @@ describe('CO2 test', () =>
             })
             .expect('Content-Type', 'application/json; charset=utf-8')
             .expect(200)
-        
-                try
-                {
-                    expect(data.body).toMatchObject({
-                        "emissionsperkm": 0.0321,
-                        "transporttype": "Aankoppelrit",
-                        "fe": "0",
-                        "intervalweight": "300",
-                        "teu": 0
-                    }); 
-                }
-                catch (err)
-                {
-                    err.message = `${ err.message }`;
-                    throw err;
-                }
-                
-                done()
+           .then((res) =>
+           {
+            try
+            {
+                expect(res.body).toMatchObject({
+                    "emissionsperkm": 0.0321,
+                    "transporttype": "Aankoppelrit",
+                    "fe": "0",
+                    "intervalweight": "300",
+                    "teu": 0
+                }); 
+            }
+            catch (err)
+            {
+                err.message = `${ err.message }`;
+                throw err;
+            }
+            
+            done()
+           })
+               
         
     })
 
     it('should return 200 & one client', async done =>
     {
-      const data = await request(app)
+      await request(app)
             .get('/co2/0/300/0/Aankoppelrit')
             .expect('Content-Type', /json/)
             .expect(200)
-     
-                try
-                {
-                    expect(data.body).toMatchObject({
-                        "emissionsperkm": 0.0321,
-                        "transporttype": "Aankoppelrit",
-                        "fe": "0",
-                        "intervalweight": "300",
-                        "teu": 0
-                    }); 
-                }
-                catch (err)
-                {
-                    err.message = `${ err.message }`;
-                    throw err;
-                }
-                done()
+          .then((res) =>
+          {
+            try
+            {
+                expect(res.body).toMatchObject({
+                    "emissionsperkm": 0.0321,
+                    "transporttype": "Aankoppelrit",
+                    "fe": "0",
+                    "intervalweight": "300",
+                    "teu": 0
+                }); 
+            }
+            catch (err)
+            {
+                err.message = `${ err.message }`;
+                throw err;
+            }
+            done()
+          })
+              
        
     })
 
     it('should delete client & return 200', async done =>
     {
-        const data = await request(app)
+       await request(app)
             .delete('/co2/0/300/0/Aankoppelrit')
             .expect('Content-Type', /json/)
             .expect(200)
-         
+            .then((res) =>
+            {
                 try
                 {
-                    expect(data.body).toMatchObject({
+                    expect(res.body).toMatchObject({
                         "emissionsperkm": 0.0321,
                         "transporttype": "Aankoppelrit",
                         "fe": "0",
@@ -127,6 +137,8 @@ describe('CO2 test', () =>
                     throw err;
                 }
                 done()
+            })
+               
        
     })
    

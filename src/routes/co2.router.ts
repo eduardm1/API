@@ -30,10 +30,11 @@ router.get("/:fe/:intervalweight/:teu/:transporttype", async (req, res) => {
     const controller = new Co2Controller();
     const response = await controller.getCo2(req.params.fe, req.params.intervalweight, req.params.teu, req.params.transporttype);
     res.setHeader('Content-Type', 'application/json');
-
     return res.send(response);
   }
-  catch(err) {
+  catch (err)
+  {
+    console.log("ERRR", err);
     res.status(404).send({ message: err });
   }
 
