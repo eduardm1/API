@@ -4,6 +4,7 @@ import swaggerUI from 'swagger-ui-express';
 import dotEnv from 'dotenv';
     
 import Router from './routes/';
+import { PrismaClient } from '.prisma/client';
     
  /**
  * If the NODE_ENV is not production, it will use everything from the .env
@@ -15,7 +16,7 @@ const PORT = process.env.PORT || 8000;
     
 //Instantiate the express server. 
 const app: Application = express();
-    
+
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(express.static("public"));
@@ -43,5 +44,11 @@ app.use(
     //Start the server on port ${PORT}
  app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
-    });
-    
+ });
+
+declare global
+{
+    var prisma: PrismaClient
+} 
+
+globalThis.prisma = new PrismaClient()
