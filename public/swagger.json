@@ -157,8 +157,15 @@
 			"post": {
 				"operationId": "CreateClient",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Client"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -181,6 +188,40 @@
 		"/client/{clientCode}": {
 			"get": {
 				"operationId": "GetClient",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Client"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Client"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "clientCode",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteClient",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -325,8 +366,15 @@
 			"post": {
 				"operationId": "CreateCo2",
 				"responses": {
-					"204": {
-						"description": "No content"
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CO2Full"
+								}
+							}
+						}
 					}
 				},
 				"tags": [
@@ -349,6 +397,64 @@
 		"/co2/{fe}/{intervalweight}/{teu}/{transporttype}": {
 			"get": {
 				"operationId": "GetCo2",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/CO2Full"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CO2"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "fe",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "intervalweight",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "teu",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "transporttype",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteCo2",
 				"responses": {
 					"200": {
 						"description": "Ok",

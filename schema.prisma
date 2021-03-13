@@ -73,7 +73,7 @@ model Shipment {
   NOX                NOX       @relation(fields: [transporttype, intervalweight, teu], references: [transporttype, intervalweight, teu])
 }
 
-model Route {
+model Routes {
   routeid       String @id @db.VarChar(255)
   modality      String @db.VarChar(255)
   fueltype      String @db.VarChar(255)
