@@ -46,10 +46,9 @@
 
 ## :dart: About ##
 
-This project is intended to serve as a start for a REST API for the 3rd module, Business Intelligence and IT, within the University of Twente. 
+A REST API for module 3, Business Intelligence and IT, at University of Twente.
 
-Even though the API routes that are created within this project are probably not fit for your case, this README should be enough to help you design it for your own case.
-
+The API routes will most likely not fit your case. This README will guide you to make it fit your own case.
 
 
 ## :question: Why an API? ##
@@ -67,9 +66,12 @@ If not for this API, your app will be outdated due to the fact that we can't use
 
 An API request occurs when a developer adds an endpoint to a URL and makes a call to the server.
 
-An API endpoint refers to the touchpoints of interaction between an API and another system.  An endpoint provides the location where an API accesses the resources they need. An API works by requesting information from a server and then receiving a response after that. 
+An API endpoint refers to the touchpoints of interaction between an API and another system.  An endpoint provides the location where an API accesses the resources they need. An API works by requesting information from a server and then receiving a response after that that can be used by the users (us). 
 
-For more information about REST operations, please check: https://learning.postman.com/docs/getting-started/sending-the-first-request/.
+For more information about REST operations(when curious), please check: https://learning.postman.com/docs/getting-started/sending-the-first-request/.
+
+An visual overview of the implementation in this project:
+<img alt="Schema" src="./flowchart.jpg">
 
 
 ## :notebook: What is TypeScript? ##
@@ -78,7 +80,15 @@ I would recommend reading https://www.typescriptlang.org/docs/handbook/typescrip
 
 ## :notebook: What is Prisma? ##
 
-Without getting into too much details (for those who want, there is a link below), Prisma is a tool that will conveniently synchronize our Postgres, update it and give us a set of tools to manipulate the database without writing literal SQL queries. 
+Without getting into too much details (for those who want, there is a link below), Prisma is a tool that will conveniently synchronize our Postgres database, update it and give us a set of tools to manipulate the database without writing literal SQL queries. 
+
+https://www.prisma.io/
+
+## :notebook: What is an API route? ##
+
+An API route is used to retrieve information from the API. For instance we could have a route for client like this: /client. Our API is hosted on https://localhost:8000. So, our books route would look like: https://localhost:8000/client. The API will use the route to access the endpoints and return all the info it holds about the client table. 
+
+Routes can be added to the API to be able to make various requests. Keep in mind that they need to be unique.
 
 ## :rocket: Technologies ##
 
@@ -95,6 +105,9 @@ The following tools were used in this project:
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
 ## :checkered_flag: Starting ##
+Open the terminal on your machine and execute the following commands.
+
+The `$` is used the indicate the start of the command. So do not enter it when executing the commands.
 
 ```bash
 # Clone this project
@@ -220,7 +233,7 @@ The model can be found in the root folder in the schema.prisma file.
 
 ## :memo: License ##
 
-This project is under licens1e from MIT. For more details, see the [LICENSE](LICENSE.md) file.
+This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
 Made with :heart: by <a href="https://github.com/eduardm1" target="_blank">Eduard Modreanu</a>
