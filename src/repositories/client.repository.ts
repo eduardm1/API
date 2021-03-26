@@ -1,9 +1,12 @@
 import { Client, prisma, PrismaClient,} from '@prisma/client'
 
 //get all the clients from the database.
-export const getClients = async (): Promise<Client[]> => {
+export const getClients = async (offset: number, limit: number): Promise<Client[]> => {
     // console.log(userRepository.metadata);
-    return await globalThis.prisma.client.findMany();
+    return await globalThis.prisma.client.findMany({
+        skip: offset,
+        take: limit
+    });
     
 }
 

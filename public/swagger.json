@@ -152,7 +152,26 @@
 					"Client"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			},
 			"post": {
 				"operationId": "CreateClient",
@@ -346,7 +365,7 @@
 				]
 			},
 			"delete": {
-				"operationId": "DeleteCo2",
+				"operationId": "DeleteRoute",
 				"responses": {
 					"200": {
 						"description": "Ok",

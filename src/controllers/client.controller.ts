@@ -1,5 +1,5 @@
 import { Client, Prisma } from "@prisma/client";
-import { Get, Route, Tags, Post, Body, Path, Delete } from "tsoa";
+import { Get, Route, Tags, Post, Body, Path, Delete, Query } from "tsoa";
 import {
   getClients,
   createClient,
@@ -15,8 +15,8 @@ export default class ClientController {
 
 
   @Get("/")
-  public async getClients(): Promise<Client[]> {
-    return await getClients();
+  public async getClients(@Query() offset: number, @Query() limit: number): Promise<Client[]> {
+    return await getClients(offset, limit);
   }
 
   @Post("/")

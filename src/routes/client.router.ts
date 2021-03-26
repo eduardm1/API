@@ -7,7 +7,8 @@ const router = express.Router();
 router.get("/", async (_req, res) => {
   try {
     const controller = new ClientController();
-    const response = await controller.getClients();
+    const response = await controller.getClients(Number(_req.query.offset), Number(_req.query.limit));
+
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
   }
@@ -23,6 +24,7 @@ router.post("/", async (req, res) => {
     const controller = new ClientController();
     const response = await controller.createClient(req.body);
     res.setHeader('Content-Type', 'application/json');
+    console.log(req.body)
     return res.send(response);
   }
   catch(err) {
