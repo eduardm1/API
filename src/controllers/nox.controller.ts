@@ -32,8 +32,8 @@ export default class NoxController {
     return await getNox( intervalweight, teu, transporttype);
   }
 
-  @Delete('/:intervalweight/:teu/:transporttype')
-  public async deleteNox( intervalweight: string, teu: string, transporttype: string): Promise<NOX| null> {
+  @Delete('/query')
+  public async deleteNox(@Query() intervalweight: string, @Query() teu: string, @Query() transporttype: string): Promise<NOX| null> {
     return await deleteNox( intervalweight, teu, transporttype)
   }
 }

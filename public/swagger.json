@@ -169,6 +169,97 @@
 				],
 				"type": "object",
 				"description": "Model Container"
+			},
+			"Shipment": {
+				"properties": {
+					"co2pershipment": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"teu": {
+						"type": "number",
+						"format": "double",
+						"nullable": true
+					},
+					"shipmentweight": {
+						"type": "number",
+						"format": "double"
+					},
+					"transporttype": {
+						"type": "string"
+					},
+					"intervalweight": {
+						"type": "string",
+						"nullable": true
+					},
+					"containertype": {
+						"type": "string"
+					},
+					"toclient": {
+						"type": "string"
+					},
+					"fromclient": {
+						"type": "string"
+					},
+					"routeid": {
+						"type": "string"
+					},
+					"feto": {
+						"type": "string"
+					},
+					"fefrom": {
+						"type": "string"
+					},
+					"emissionprocessing": {
+						"type": "number",
+						"format": "double"
+					},
+					"intervaldistance": {
+						"type": "string"
+					},
+					"distance": {
+						"type": "number",
+						"format": "double"
+					},
+					"modality": {
+						"type": "string"
+					},
+					"date": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"sequencenumber": {
+						"type": "number",
+						"format": "double"
+					},
+					"shipmentid": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"co2pershipment",
+					"teu",
+					"shipmentweight",
+					"transporttype",
+					"intervalweight",
+					"containertype",
+					"toclient",
+					"fromclient",
+					"routeid",
+					"feto",
+					"fefrom",
+					"emissionprocessing",
+					"intervaldistance",
+					"distance",
+					"modality",
+					"date",
+					"sequencenumber",
+					"shipmentid"
+				],
+				"type": "object",
+				"description": "Model Shipment"
 			}
 		},
 		"securitySchemes": {}
@@ -693,9 +784,7 @@
 						}
 					}
 				]
-			}
-		},
-		"/co2/{fe}/{intervalweight}/{teu}/{transporttype}": {
+			},
 			"delete": {
 				"operationId": "DeleteCo2",
 				"responses": {
@@ -721,7 +810,7 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "path",
+						"in": "query",
 						"name": "fe",
 						"required": true,
 						"schema": {
@@ -729,7 +818,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "intervalweight",
 						"required": true,
 						"schema": {
@@ -737,7 +826,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "teu",
 						"required": true,
 						"schema": {
@@ -745,7 +834,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "transporttype",
 						"required": true,
 						"schema": {
@@ -909,9 +998,7 @@
 						}
 					}
 				]
-			}
-		},
-		"/nox/{intervalweight}/{teu}/{transporttype}": {
+			},
 			"delete": {
 				"operationId": "DeleteNox",
 				"responses": {
@@ -937,7 +1024,7 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "path",
+						"in": "query",
 						"name": "intervalweight",
 						"required": true,
 						"schema": {
@@ -945,7 +1032,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "teu",
 						"required": true,
 						"schema": {
@@ -953,7 +1040,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "transporttype",
 						"required": true,
 						"schema": {
@@ -1132,6 +1219,182 @@
 						"required": true,
 						"schema": {
 							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/shipment": {
+			"get": {
+				"operationId": "GetShipments",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Shipment"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Shipment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateShipment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Shipment"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Shipment"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Shipment"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "UpdateShipment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Shipment"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Shipment"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Shipment"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/shipment/{id}": {
+			"get": {
+				"operationId": "GetShipment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Shipment"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Shipment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteShipment",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Shipment"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Shipment"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
 						}
 					}
 				]

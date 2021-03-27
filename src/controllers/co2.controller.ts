@@ -31,8 +31,8 @@ export default class CO2Controller {
     return await getCo2(fe, intervalweight, teu, transporttype);
   }
 
-  @Delete('/:fe/:intervalweight/:teu/:transporttype')
-  public async deleteCo2(fe: string, intervalweight: string, teu: string, transporttype: string): Promise<CO2Full| null> {
+  @Delete('/query')
+  public async deleteCo2(@Query() fe: string, @Query() intervalweight: string, @Query() teu: string, @Query() transporttype: string): Promise<CO2Full| null> {
     return await deleteCo2(fe, intervalweight, teu, transporttype)
   }
 }

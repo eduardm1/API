@@ -14,7 +14,7 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/query", async (req, res) => {
   try {
     const controller = new Co2Controller();
     const response = await controller.getCo2(String(req.query.fe), String(req.query.intervalweight),String(req.query.teu), String(req.query.transporttype));
@@ -51,7 +51,7 @@ router.post("/", async (req, res) => {
   }
  });
 
-router.delete("/:fe/:intervalweight/:teu/:transporttype", async (req, res) => {
+router.delete("/query", async (req, res) => {
   try {
     const controller = new Co2Controller();
     const response = await controller.deleteCo2(String(req.query.fe), String(req.query.intervalweight),String(req.query.teu), String(req.query.transporttype));
