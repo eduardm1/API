@@ -326,10 +326,59 @@
 					"Route"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			},
 			"post": {
 				"operationId": "CreateRoute",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Routes"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Route"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Routes"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "UpdateRoute",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -451,7 +500,26 @@
 					"CO2"
 				],
 				"security": [],
-				"parameters": []
+				"parameters": [
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			},
 			"post": {
 				"operationId": "CreateCo2",
@@ -482,9 +550,39 @@
 						}
 					}
 				}
+			},
+			"put": {
+				"operationId": "UpdateCo2",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CO2Full"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"CO2"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CO2Full"
+							}
+						}
+					}
+				}
 			}
 		},
-		"/co2/{fe}/{intervalweight}/{teu}/{transporttype}": {
+		"/co2/query": {
 			"get": {
 				"operationId": "GetCo2",
 				"responses": {
@@ -510,7 +608,7 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "path",
+						"in": "query",
 						"name": "fe",
 						"required": true,
 						"schema": {
@@ -518,7 +616,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "intervalweight",
 						"required": true,
 						"schema": {
@@ -526,7 +624,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "teu",
 						"required": true,
 						"schema": {
@@ -534,7 +632,7 @@
 						}
 					},
 					{
-						"in": "path",
+						"in": "query",
 						"name": "transporttype",
 						"required": true,
 						"schema": {
@@ -542,7 +640,9 @@
 						}
 					}
 				]
-			},
+			}
+		},
+		"/co2/{fe}/{intervalweight}/{teu}/{transporttype}": {
 			"delete": {
 				"operationId": "DeleteCo2",
 				"responses": {
