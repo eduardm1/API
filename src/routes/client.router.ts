@@ -63,4 +63,17 @@ router.delete("/:clientCode", async (req, res) => {
   }
 })
 
+router.put("/", async (req, res) => {
+  try {
+    const controller = new ClientController();
+    const response = await controller.updateClient(req.body);
+    res.setHeader('Content-Type', 'application/json');
+    return res.send(response);
+  }
+  catch(err) {
+    
+    res.status(404).send({message: "No client  was created"})
+  }
+});
+
 export default router;

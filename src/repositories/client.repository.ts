@@ -17,6 +17,14 @@ export const createClient = async (payload: Client): Promise<Client> => {
     });
 }
 
+export const updateClient = async (payload: Client): Promise<Client> => {
+    return await globalThis.prisma.client.update({
+        where: {
+            clientcode: payload.clientcode
+        },
+        data: payload
+    });
+}
 //get a single client based on it's id from the URL parameter
 export const getClient = async (id:string): Promise<Client | null>  => {
     return await globalThis.prisma.client.findUnique({

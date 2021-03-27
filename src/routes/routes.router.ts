@@ -15,6 +15,20 @@ router.get("/", async (_req, res) =>
 
 });
 
+
+
+router.get("/:routeId", async (req, res) => {
+  try
+  {
+    const controller = new RouteController();
+    const response = await controller.getRoute(req.params.routeId);
+    res.setHeader('Content-Type', 'application/json');
+    return res.send(response);
+
+  }
+  catch (err) { res.status(404).send({ message: err }); }
+});
+
 router.post("/", async (req, res) =>
 {
   try
@@ -30,18 +44,6 @@ router.post("/", async (req, res) =>
     res.status(404).send({ message: err });
   }
  
-});
-
-router.get("/:routeId", async (req, res) => {
-  try
-  {
-    const controller = new RouteController();
-    const response = await controller.getRoute(req.params.routeId);
-    res.setHeader('Content-Type', 'application/json');
-    return res.send(response);
-
-  }
-  catch (err) { res.status(404).send({ message: err }); }
 });
 
 router.delete("/:routeId", async (req, res) => {

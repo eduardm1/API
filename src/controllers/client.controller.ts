@@ -1,10 +1,11 @@
 import { Client, Prisma } from "@prisma/client";
-import { Get, Route, Tags, Post, Body, Path, Delete, Query } from "tsoa";
+import { Get, Route, Tags, Post, Body, Path, Delete, Query, Put } from "tsoa";
 import {
   getClients,
   createClient,
   getClient,
-  deleteClient
+  deleteClient,
+  updateClient
 } from "../repositories/client.repository";
 /**
  * The controller class is used to control the SwaggerUI
@@ -22,6 +23,11 @@ export default class ClientController {
   @Post("/")
   public async createClient(@Body() body: Client): Promise<Client> {
     return await createClient(body);
+  }
+
+  @Put("/")
+  public async updateClient(@Body() body: Client): Promise<Client> {
+    return await updateClient(body);
   }
 
   @Get("/:clientCode")
