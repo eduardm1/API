@@ -116,6 +116,59 @@
 				],
 				"type": "object",
 				"description": "Model CO2Full"
+			},
+			"NOX": {
+				"properties": {
+					"teu": {
+						"type": "number",
+						"format": "double"
+					},
+					"intervalweight": {
+						"type": "string"
+					},
+					"transporttype": {
+						"type": "string"
+					},
+					"emissionsperkm": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"teu",
+					"intervalweight",
+					"transporttype",
+					"emissionsperkm"
+				],
+				"type": "object",
+				"description": "Model NOX"
+			},
+			"Container": {
+				"properties": {
+					"heightcontainer": {
+						"type": "number",
+						"format": "double"
+					},
+					"widthcontainer": {
+						"type": "number",
+						"format": "double"
+					},
+					"lengthcontainer": {
+						"type": "number",
+						"format": "double"
+					},
+					"containertype": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"heightcontainer",
+					"widthcontainer",
+					"lengthcontainer",
+					"containertype"
+				],
+				"type": "object",
+				"description": "Model Container"
 			}
 		},
 		"securitySchemes": {}
@@ -694,6 +747,388 @@
 					{
 						"in": "path",
 						"name": "transporttype",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/nox": {
+			"get": {
+				"operationId": "GetNoxs",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/NOX"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Nox"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateNox",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NOX"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Nox"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/NOX"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "UpdateNox",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/NOX"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Nox"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/NOX"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/nox/query": {
+			"get": {
+				"operationId": "GetNox",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/NOX"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Nox"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "intervalweight",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "teu",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "transporttype",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/nox/{intervalweight}/{teu}/{transporttype}": {
+			"delete": {
+				"operationId": "DeleteNox",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/NOX"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Nox"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "intervalweight",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "teu",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "path",
+						"name": "transporttype",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/container": {
+			"get": {
+				"operationId": "GetContainers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Container"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Container"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateContainer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Container"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Container"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Container"
+							}
+						}
+					}
+				}
+			},
+			"put": {
+				"operationId": "UpdateContainer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Container"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Container"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Container"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/container/{containerType}": {
+			"get": {
+				"operationId": "GetContainer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Container"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Container"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "containerType",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"delete": {
+				"operationId": "DeleteContainer",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Container"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Container"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "containerType",
 						"required": true,
 						"schema": {
 							"type": "string"

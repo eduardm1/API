@@ -9,9 +9,9 @@ import {
  updateNox
 } from "../repositories/nox.repository";
 
-@Route("co2")
-@Tags("CO2")
-export default class CO2Controller {
+@Route("nox")
+@Tags("Nox")
+export default class NoxController {
   @Get("/")
   public async getNoxs(@Query() offset: number, @Query() limit: number): Promise<NOX[]> {
     return await getNoxs(offset, limit);
@@ -32,7 +32,7 @@ export default class CO2Controller {
     return await getNox( intervalweight, teu, transporttype);
   }
 
-  @Delete('/:fe/:intervalweight/:teu/:transporttype')
+  @Delete('/:intervalweight/:teu/:transporttype')
   public async deleteNox( intervalweight: string, teu: string, transporttype: string): Promise<NOX| null> {
     return await deleteNox( intervalweight, teu, transporttype)
   }

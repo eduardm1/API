@@ -3,6 +3,8 @@ import ClientRouter from "./client.router";
 import RouteRouter from './routes.router';
 import CO2Router from './co2.router';
 import NoxRouter from './nox.router';
+import ContainerRouter from './container.router';
+import ShipmentController from './shipment.router';
 
 //Instantiate the router 
 const router = express.Router();
@@ -12,6 +14,8 @@ router.use("/client", ClientRouter)
 router.use("/route", RouteRouter);
 router.use("/co2", CO2Router);
 router.use("/nox", NoxRouter);
+router.use("/container", ContainerRouter);
+router.use("/shipment", ShipmentController);
 
 //Export the router that then can be used in the ../index.ts
 export default router;
