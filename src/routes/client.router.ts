@@ -1,5 +1,5 @@
 import express from "express";
-import ClientController from "../controllers/client.controller";
+import { ClientController } from "../controllers/client.controller";
 
 const router = express.Router();
 
@@ -12,8 +12,10 @@ router.get("/:clientCode?", async (_req, res) => {
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
   }
-  catch(err) {
-    res.status(404).send({message: "No clients were found."})
+  catch (err)
+  {
+
+    res.status(404).send({message: err})
   }
 
 });

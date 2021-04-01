@@ -1,15 +1,22 @@
-FROM node:12-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+FROM node:14-alpine
 
-FROM node:12-alpine AS server
-WORKDIR /app
-COPY package* ./
-RUN npm install --production
-COPY --from=builder ./app/public ./public
-COPY --from=builder ./app/build ./build
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
+COPY tsoa.json /usr/src/app/
+COPY schema.prisma /usr/src/app/
+COPY .env /usr/src/app/
+
+RUN npm install
+
+RUN npx prisma introspect
+RUN npx prisma generate
+
+COPY . /usr/src/app/
+RUN npm run build:all
+
+ENV NODE_ENV docker
+
 EXPOSE 8000
-CMD ["npm", "start"]
+
+CMD [ "npm", "run", "server" ]

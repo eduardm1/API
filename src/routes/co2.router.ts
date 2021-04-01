@@ -1,11 +1,11 @@
 import express from "express";
-import Co2Controller from "../controllers/co2.controller";
+import { CO2Controller } from "../controllers/co2.controller";
 
 const router = express.Router();
 
 router.get("/", async (_req, res) => {
   try {
-    const controller = new Co2Controller();
+    const controller = new CO2Controller();
     const response = await controller.getCo2s(Number(_req.query.offset), Number(_req.query.limit));
     return res.send(response);
   } 
@@ -16,7 +16,7 @@ router.get("/", async (_req, res) => {
 
 router.get("/query", async (req, res) => {
   try {
-    const controller = new Co2Controller();
+    const controller = new CO2Controller();
     const response = await controller.getCo2(String(req.query.fe), String(req.query.intervalweight),String(req.query.teu), String(req.query.transporttype));
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
@@ -31,7 +31,7 @@ router.get("/query", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-     const controller = new Co2Controller();
+     const controller = new CO2Controller();
      const response = await controller.createCo2(req.body);
      res.setHeader("Content-type", "application/json")
      return res.send(response);
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
 
  router.put("/", async (req, res) => {
   try {
-     const controller = new Co2Controller();
+     const controller = new CO2Controller();
      const response = await controller.updateCo2(req.body);
      res.setHeader("Content-type", "application/json")
      return res.send(response);
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
 
 router.delete("/query", async (req, res) => {
   try {
-    const controller = new Co2Controller();
+    const controller = new CO2Controller();
     const response = await controller.deleteCo2(String(req.query.fe), String(req.query.intervalweight),String(req.query.teu), String(req.query.transporttype));
     res.setHeader('Content-Type', 'application/json');
 

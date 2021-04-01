@@ -1,7 +1,6 @@
-import { Container, prisma, PrismaClient,} from '@prisma/client'
-
+import {ContainerModel} from '../models/model'
 //get all the clients from the database.
-export const getContainers = async (offset: number, limit: number, containerType: string | undefined): Promise<Container[]> => {
+export const getContainers = async (offset: number, limit: number, containerType: string | undefined): Promise<any> => {
     // console.log(userRepository.metadata);
     return await globalThis.prisma.container.findMany({
         skip: offset,
@@ -14,13 +13,13 @@ export const getContainers = async (offset: number, limit: number, containerType
 }
 
 //create a client in the database based on the body of the POST request
-export const createContainer = async (payload: Container): Promise<Container> => {
+export const createContainer = async (payload: ContainerModel): Promise<any> => {
     return await globalThis.prisma.container.create({
         data: payload
     });
 }
 
-export const updateContainer = async (payload: Container): Promise<Container> => {
+export const updateContainer = async (payload: ContainerModel): Promise<any> => {
     return await globalThis.prisma.container.update({
         where: {
             containertype: payload.containertype
@@ -29,7 +28,7 @@ export const updateContainer = async (payload: Container): Promise<Container> =>
     });
 }
 
-export const deleteContainer = async (containerType: string): Promise<Container | null> =>
+export const deleteContainer = async (containerType: string): Promise<any | null> =>
 {
     return await globalThis.prisma.container.delete({
         where:{

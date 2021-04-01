@@ -1,5 +1,6 @@
-import { Shipment, Prisma } from "@prisma/client";
-import { Get, Route, Tags, Post, Body, Path, Delete, Query, Put } from "tsoa";
+import { Shipment} from '@prisma/client'
+import { ShipmentModel } from '../models/model'
+import { Get, Route, Tags, Post, Body, Path, Delete, Query, Put, Controller  } from "tsoa";
 import {
   createShipment,
   deleteShipment,
@@ -11,26 +12,26 @@ import {
  */
 @Route("shipment")
 @Tags("Shipment")
-export default class ShipmentController {
+export class ShipmentController extends Controller {
 
 
-  @Get("/:shipmentId")
-  public async getShipments(@Query() offset: number, @Query() limit: number, @Path() id: number | undefined): Promise<Shipment[]> {
+  @Get("/:id?")
+  public async getShipments(@Query() offset: number, @Query() limit: number, @Path() id: number): Promise<ShipmentModel[]> {
     return await getShipments(offset, limit, id);
   }
 
   @Post("/")
-  public async createShipment(@Body() body: Shipment): Promise<Shipment> {
+  public async createShipment(@Body() body: Shipment): Promise<ShipmentModel> {
     return await createShipment(body);
   }
 
   @Put("/")
-  public async updateShipment(@Body() body: Shipment): Promise<Shipment> {
+  public async updateShipment(@Body() body: Shipment): Promise<ShipmentModel> {
     return await updateShipment(body);
   }
 
   @Delete("/:id")
- public async deleteShipment(id: number): Promise<Shipment| null>  {
+ public async deleteShipment(id: number): Promise<ShipmentModel| null>  {
     return await deleteShipment(id);
   }
 }

@@ -1,17 +1,17 @@
-import { CO2Full, PrismaClient, } from '@prisma/client'
+import { CO2Model } from '../models/model'
 
 
-export const getCo2s = async (offset: number, limit: number): Promise<CO2Full[]> => {
+export const getCo2s = async (offset: number, limit: number): Promise<any> => {
     // console.log(userRepository.metadata);
-    return await globalThis.prisma.cO2Full.findMany({
+    return await globalThis.prisma.cO2.findMany({
         skip: offset,
         take: limit
     });
 
 }
 
-export const createCo2 = async (payload: CO2Full): Promise<CO2Full> => {
-    return await globalThis.prisma.cO2Full.create({
+export const createCo2 = async (payload: CO2Model): Promise<any> => {
+    return await globalThis.prisma.cO2.create({
         data: {
             ...payload
         }
@@ -19,8 +19,8 @@ export const createCo2 = async (payload: CO2Full): Promise<CO2Full> => {
 }
 
 
-export const updateCo2 = async (payload: CO2Full): Promise<CO2Full> => {
-    return await globalThis.prisma.cO2Full.update({
+export const updateCo2 = async (payload: CO2Model): Promise<any> => {
+    return await globalThis.prisma.cO2.update({
         where:{
             transporttype_fe_intervalweight_teu: {
                 fe: payload.fe,
@@ -35,8 +35,8 @@ export const updateCo2 = async (payload: CO2Full): Promise<CO2Full> => {
     })
 }
 
-export const getCo2 = async (fe: string, intervalweight: string, teu: string, transporttype: string): Promise<CO2Full | null> => {
-    return await globalThis.prisma.cO2Full.findUnique({
+export const getCo2 = async (fe: string, intervalweight: string, teu: string, transporttype: string): Promise<any | null> => {
+    return await globalThis.prisma.cO2.findUnique({
         where: {
             transporttype_fe_intervalweight_teu: {
                 fe: fe,
@@ -48,8 +48,8 @@ export const getCo2 = async (fe: string, intervalweight: string, teu: string, tr
     })
 };
 
-export const deleteCo2 = async (fe: string, intervalweight: string, teu: string, transporttype: string): Promise<CO2Full | null> => {
-    return await globalThis.prisma.cO2Full.delete({
+export const deleteCo2 = async (fe: string, intervalweight: string, teu: string, transporttype: string): Promise<any | null> => {
+    return await globalThis.prisma.cO2.delete({
         where: {
             transporttype_fe_intervalweight_teu: {
                 fe: fe,

@@ -1,5 +1,5 @@
 import express from "express";
-import NoxController from "../controllers/nox.controller";
+import { NoxController } from "../controllers/nox.controller";
 
 const router = express.Router();
 

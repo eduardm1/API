@@ -1,7 +1,7 @@
-import { NOX, } from '@prisma/client'
+import { NOXModel} from '../models/model'
 
 
-export const getNoxs = async (offset: number, limit: number): Promise<NOX[]> => {
+export const getNoxs = async (offset: number, limit: number): Promise<any[]> => {
     // console.log(userRepository.metadata);
     return await globalThis.prisma.nOX.findMany({
         skip: offset,
@@ -10,7 +10,7 @@ export const getNoxs = async (offset: number, limit: number): Promise<NOX[]> => 
 
 }
 
-export const createNox = async (payload: NOX): Promise<NOX> => {
+export const createNox = async (payload: NOXModel): Promise<any> => {
     return await globalThis.prisma.nOX.create({
         data: {
             ...payload
@@ -18,7 +18,7 @@ export const createNox = async (payload: NOX): Promise<NOX> => {
     })
 }
 
-export const updateNox = async (payload: NOX): Promise<NOX> => {
+export const updateNox = async (payload: NOXModel): Promise<any> => {
     return await globalThis.prisma.nOX.update({
         where:{
             transporttype_intervalweight_teu: {
@@ -33,7 +33,7 @@ export const updateNox = async (payload: NOX): Promise<NOX> => {
     })
 }
 
-export const getNox = async (intervalweight: string, teu: string, transporttype: string): Promise<NOX | null> => {
+export const getNox = async (intervalweight: string, teu: string, transporttype: string): Promise<any | null> => {
     return await globalThis.prisma.nOX.findUnique({
         where: {
             transporttype_intervalweight_teu: {
@@ -45,7 +45,7 @@ export const getNox = async (intervalweight: string, teu: string, transporttype:
     })
 };
 
-export const deleteNox = async ( intervalweight: string, teu: string, transporttype: string): Promise<NOX | null> => {
+export const deleteNox = async ( intervalweight: string, teu: string, transporttype: string): Promise<any | null> => {
     return await globalThis.prisma.nOX.delete({
         where: {
             transporttype_intervalweight_teu: {

@@ -4,15 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/index.js",
-    "predev": "npm run swagger",
-    "prebuild": "npm run swagger",
-    "build": "tsc",
+    "server": "node dist/src/index.js",
+    "build:routes": "mkdir -p src/routes && tsoa routes",
+    "build:swagger": "mkdir -p api && mkdir -p api/dist && tsoa swagger",
+    "swagger": "npm run swagger",
+    "build:ts": "tsc -p ./",
+    "build:all": "npm run build:routes && npm run build:swagger && npm run build:ts",
     "dev": "concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
-    "swagger": "tsoa spec",
-    "docker-build": "docker && build -t && express-ts .",
-    "compose": "docker-compose up",
-    "prisma-push": "npx prisma db push --preview-feature",
     "test:unit": " jest  --coverage --detectOpenHandles --runInBand"
   },
   "nodemonConfig": {
