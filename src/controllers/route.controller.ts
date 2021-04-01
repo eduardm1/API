@@ -1,7 +1,6 @@
 import { Prisma, Routes } from "@prisma/client";
 import { Get, Route, Tags, Post, Body, Path, Delete, Query, Put } from "tsoa";
 import {
- getRoute,
  createRoute,
   getRoutes,
  deleteRoute,
@@ -10,10 +9,12 @@ import {
 
 @Route("Route")
 @Tags("Route")
-export default class RouteController {
-  @Get("/")
-  public async getRoutes(@Query() offset: number, @Query() limit: number): Promise<Routes[]> {
-    return getRoutes(offset, limit);
+export default class RouteController
+{
+  
+  @Get("/:routeId?")
+  public async getRoutes(@Query() offset: number, @Query() limit: number, @Path() routeId: string | undefined): Promise<Routes[]> {
+    return getRoutes(offset, limit, routeId);
   }
 
   @Post("/")
@@ -24,12 +25,6 @@ export default class RouteController {
   @Put("/")
   public async updateRoute(@Body() body: Routes): Promise<Routes> {
     return updateRoute(body);
-  }
-
-  @Get("/:routeId")
-  public async getRoute(@Path() routeId: string): Promise<Routes | null>
-  {
-    return getRoute(routeId);
   }
 
     @Delete('/:routeId')

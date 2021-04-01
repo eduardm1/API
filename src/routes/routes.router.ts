@@ -3,30 +3,18 @@ import RouteController from "../controllers/route.controller";
 
 const router = express.Router();
 
-router.get("/", async (_req, res) =>
+router.get("/:routeId?", async (_req, res) =>
 {
   try
   {
     const controller = new RouteController();
-    const response = await controller.getRoutes(Number(_req.query.offset), Number(_req.query.limit));
+    const response = await controller.getRoutes(Number(_req.query.offset), Number(_req.query.limit), _req.params.routeId);
     return res.send(response);
   }
   catch (err) {res.status(404).send({ message: err }); }
 
 });
 
-
-router.get("/:routeId", async (req, res) => {
-  try
-  {
-    const controller = new RouteController();
-    const response = await controller.getRoute(req.params.routeId);
-    res.setHeader('Content-Type', 'application/json');
-    return res.send(response);
-
-  }
-  catch (err) { res.status(404).send({ message: err }); }
-});
 
 router.post("/", async (req, res) =>
 {

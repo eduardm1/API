@@ -1,11 +1,14 @@
 import { Client, prisma, PrismaClient,} from '@prisma/client'
 
 //get all the clients from the database.
-export const getClients = async (offset: number, limit: number): Promise<Client[]> => {
+export const getClients = async (offset: number, limit: number, client: string | undefined): Promise<Client[]> => {
     // console.log(userRepository.metadata);
     return await globalThis.prisma.client.findMany({
         skip: offset,
-        take: limit
+        take: limit,
+        where: {
+            clientcode: client
+        }
     });
     
 }
@@ -25,14 +28,6 @@ export const updateClient = async (payload: Client): Promise<Client> => {
         data: payload
     });
 }
-//get a single client based on it's id from the URL parameter
-export const getClient = async (id:string): Promise<Client | null>  => {
-    return await globalThis.prisma.client.findUnique({
-        where: {
-            clientcode: id
-        }
-    })
-  };
 
 export const deleteClient = async (id: string): Promise<Client | null> =>
 {

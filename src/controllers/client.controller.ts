@@ -3,7 +3,6 @@ import { Get, Route, Tags, Post, Body, Path, Delete, Query, Put } from "tsoa";
 import {
   getClients,
   createClient,
-  getClient,
   deleteClient,
   updateClient
 } from "../repositories/client.repository";
@@ -15,9 +14,9 @@ import {
 export default class ClientController {
 
 
-  @Get("/")
-  public async getClients(@Query() offset: number, @Query() limit: number): Promise<Client[]> {
-    return await getClients(offset, limit);
+  @Get("/:clientCode?")
+  public async getClients(@Query() offset: number, @Query() limit: number, @Path() clientCode: string | undefined): Promise<Client[]> {
+    return await getClients(offset, limit, clientCode);
   }
 
   @Post("/")
@@ -30,10 +29,6 @@ export default class ClientController {
     return await updateClient(body);
   }
 
-  @Get("/:clientCode")
-  public async getClient(@Path() clientCode: string): Promise<Client | null> {
-    return await getClient(clientCode);
-  }
 
   @Delete("/:clientCode")
  public async deleteClient (clientCode: string): Promise<Client| null>  {

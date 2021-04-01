@@ -1,11 +1,15 @@
 import { Shipment, prisma, PrismaClient,} from '@prisma/client'
 
 //get all the clients from the database.
-export const getShipments = async (offset: number, limit: number): Promise<Shipment[]> => {
+export const getShipments = async (offset: number, limit: number, shipmentId: number | undefined): Promise<Shipment[]> => {
     // console.log(userRepository.metadata);
+    shipmentId = shipmentId || undefined;
     return await globalThis.prisma.shipment.findMany({
         skip: offset,
-        take: limit
+        take: limit,
+        where: {
+           shipmentid: shipmentId
+        }
     });
     
 }
@@ -25,14 +29,7 @@ export const updateShipment = async (payload: Shipment): Promise<Shipment> => {
         data: payload
     });
 }
-//get a single client based on it's id from the URL parameter
-export const getShipment = async (id:number): Promise<Shipment | null>  => {
-    return await globalThis.prisma.shipment.findUnique({
-        where: {
-            shipmentid: id
-        }
-    })
-  };
+
 
 export const deleteShipment = async (id: number): Promise<Shipment | null> =>
 {

@@ -378,7 +378,7 @@
 				}
 			}
 		},
-		"/client/{clientCode}": {
+		"/client/{clientCodee}": {
 			"get": {
 				"operationId": "GetClient",
 				"responses": {
@@ -412,7 +412,9 @@
 						}
 					}
 				]
-			},
+			}
+		},
+		"/client/{clientCode}": {
 			"delete": {
 				"operationId": "DeleteClient",
 				"responses": {

@@ -3,7 +3,6 @@ import { Get, Route, Tags, Post, Body, Path, Delete, Query, Put } from "tsoa";
 import {
   createShipment,
   deleteShipment,
-  getShipment,
   getShipments,
   updateShipment
 } from "../repositories/shipment.repository";
@@ -15,9 +14,9 @@ import {
 export default class ShipmentController {
 
 
-  @Get("/")
-  public async getShipments(@Query() offset: number, @Query() limit: number): Promise<Shipment[]> {
-    return await getShipments(offset, limit);
+  @Get("/:shipmentId")
+  public async getShipments(@Query() offset: number, @Query() limit: number, @Path() id: number | undefined): Promise<Shipment[]> {
+    return await getShipments(offset, limit, id);
   }
 
   @Post("/")
@@ -28,11 +27,6 @@ export default class ShipmentController {
   @Put("/")
   public async updateShipment(@Body() body: Shipment): Promise<Shipment> {
     return await updateShipment(body);
-  }
-
-  @Get("/:id")
-  public async getShipment(@Path() id: number): Promise<Shipment | null> {
-    return await getShipment(id);
   }
 
   @Delete("/:id")

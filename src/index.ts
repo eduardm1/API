@@ -9,9 +9,9 @@ import { PrismaClient } from '.prisma/client';
  /**
  * If the NODE_ENV is not production, it will use everything from the .env
  */
-if (process.env.NODE_ENV !== 'production') {
-    dotEnv.config();
-}
+
+dotEnv.config();
+    
 const PORT = process.env.PORT || 8000;
     
 //Instantiate the express server. 

@@ -4,10 +4,10 @@ import ContainerController from "../controllers/container.controller";
 const router = express.Router();
 
 //set up the localhost:8000/client/ for a GET request
-router.get("/", async (_req, res) => {
+router.get("/:containerId?", async (_req, res) => {
   try {
     const controller = new ContainerController();
-    const response = await controller.getContainers(Number(_req.query.offset), Number(_req.query.limit));
+    const response = await controller.getContainers(Number(_req.query.offset), Number(_req.query.limit), _req.params.containerId);
 
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
@@ -33,21 +33,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-/**
- * set up the localhost:8000/client/:client for a GET request based on the URL parameter
- */
-router.get("/:clientCode", async (req, res) => {
-  try {
-    const controller = new ContainerController();
-    const response = await controller.getContainer(req.params.clientCode);
-    res.setHeader('Content-Type', 'application/json');
-    return res.send(response);
-  } catch (err)
-  {
-    console.log(err);
-    res.status(404).send({ message: "No client found" });
-  }
-});
 
 router.delete("/:containerType", async (req, res) => {
   try {

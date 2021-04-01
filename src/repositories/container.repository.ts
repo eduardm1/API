@@ -1,11 +1,14 @@
 import { Container, prisma, PrismaClient,} from '@prisma/client'
 
 //get all the clients from the database.
-export const getContainers = async (offset: number, limit: number): Promise<Container[]> => {
+export const getContainers = async (offset: number, limit: number, containerType: string | undefined): Promise<Container[]> => {
     // console.log(userRepository.metadata);
     return await globalThis.prisma.container.findMany({
         skip: offset,
-        take: limit
+        take: limit,
+        where: {
+            containertype: containerType
+        }
     });
     
 }
@@ -25,14 +28,6 @@ export const updateContainer = async (payload: Container): Promise<Container> =>
         data: payload
     });
 }
-//get a single client based on it's id from the URL parameter
-export const getContainer = async (containerType:string): Promise<Container | null>  => {
-    return await globalThis.prisma.container.findUnique({
-        where: {
-            containertype: containerType
-        }
-    })
-  };
 
 export const deleteContainer = async (containerType: string): Promise<Container | null> =>
 {

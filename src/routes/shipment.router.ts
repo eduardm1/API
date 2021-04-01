@@ -4,15 +4,16 @@ import ShipmentController from "../controllers/shipment.controller";
 const router = express.Router();
 
 //set up the localhost:8000/client/ for a GET request
-router.get("/", async (_req, res) => {
+router.get("/:shipmentId?", async (_req, res) => {
   try {
     const controller = new ShipmentController();
-    const response = await controller.getShipments(Number(_req.query.offset), Number(_req.query.limit));
-
+    const response = await controller.getShipments(Number(_req.query.offset), Number(_req.query.limit), Number(_req.params.shipmentId));
     res.setHeader('Content-Type', 'application/json');
     return res.send(response);
   }
-  catch(err) {
+  catch (err)
+  {
+    console.log( err)
     res.status(404).send({message: "No shipments were found."})
   }
 
@@ -30,22 +31,6 @@ router.post("/", async (req, res) => {
   catch(err) {
     
     res.status(404).send({message: "No shipment  was created"})
-  }
-});
-
-/**
- * set up the localhost:8000/client/:client for a GET request based on the URL parameter
- */
-router.get("/:id", async (req, res) => {
-  try {
-    const controller = new ShipmentController();
-    const response = await controller.getShipment(Number(req.params.id));
-    res.setHeader('Content-Type', 'application/json');
-    return res.send(response);
-  } catch (err)
-  {
-    console.log(err);
-    res.status(404).send({ message: "No shipment found" });
   }
 });
 
